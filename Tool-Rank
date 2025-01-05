@@ -7,7 +7,7 @@ while not _G.script1Done do
     print("Script 1 chưa hoàn thành, đang chờ...")
     task.wait(1) -- Chờ 1 giây trước khi kiểm tra lại
 end
-
+task.wait(25)
 --- GScripts-Rank ---
 script_key="MxlZzlrJuZafQSvVQxvMtJeexLEOyARs";
 _G.GPROGRESS_MODE = "Hybrid" -- Hatch
