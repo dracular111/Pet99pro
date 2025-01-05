@@ -1,6 +1,6 @@
 --- Script 1 ---
 task.wait(1)
---loadstring(game:HttpGet("https://raw.githubusercontent.com/dinhtuanp654/pet99/main/Script-1"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dinhtuanp654/pet99/main/Script-1"))()
 --- Script 2 ---
 task.wait(1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/dinhtuanp654/pet99/main/Script-2"))()
@@ -12,4 +12,4 @@ task.wait(1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/dinhtuanp654/pet99/main/Script-4"))()
 --- Script 5 ---
 task.wait(1)
---loadstring(game:HttpGet("https://raw.githubusercontent.com/dinhtuanp654/pet99/main/Script-5"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dinhtuanp654/pet99/main/Script-5"))()
