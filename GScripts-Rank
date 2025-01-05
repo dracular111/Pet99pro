@@ -1,5 +1,4 @@
 _G.script2Done = true
-
 _G.GPROGRESS_MODE = "Hybrid" -- Hatch
 _G.GGFX_MODE = 1
 _G.GRANK_TO = 99
