@@ -1,0 +1,13 @@
+-- Vòng lặp này đợi cho đến khi trò chơi được tải hoàn toàn.
+repeat wait() until game:IsLoaded()
+
+repeat
+    wait()
+until game:IsLoaded() and
+    game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui") and
+    game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MainLeft") and
+    game:GetService("Players").LocalPlayer.PlayerGui.MainLeft.Left.Currency.Diamonds.Diamonds.Visible == true and
+    not game:GetService("Players").LocalPlayer:FindFirstChild("GUIFX Holder")
+
+-- In ra thông báo khi trò chơi đã được tải hoàn toàn.
+print("[CLIENT] Loaded Game")
