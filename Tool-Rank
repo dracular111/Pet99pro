@@ -1,0 +1,13 @@
+game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("World3Teleport"):InvokeServer()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Hoith95/Pet-99/main/Del-CoreGui"))()
+
+-- Chờ đến khi trạng thái shared.script1Done là true
+while not _G.script1Done do
+    print("Script 1 chưa hoàn thành, đang chờ...")
+    task.wait(1) -- Chờ 1 giây trước khi kiểm tra lại
+end
+
+--- GScripts-Rank ---
+script_key="xznlDbCHnLICEciRYOPSEbLNyuekhFSq";
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Hoith95/Pet-99/main/GScripts-Rank"))()
