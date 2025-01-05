@@ -33,9 +33,3 @@ getgenv().Settings = {
     ["Only Online Accounts"] = false,
 }
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/86847850c3165379f5be2d9d071eaccb.lua"))()
-
--- Hàm gỡ bỏ _G.MAILBOXITEMS sau 5 tiếng
-delay(18000, function()
-    _G.MAILBOXITEMS = false
-    print("Đã gỡ bỏ MAILBOXITEMS sau 5 tiếng.")
-end)
