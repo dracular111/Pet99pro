@@ -10,4 +10,4 @@ end
 
 --- GScripts-Rank ---
 script_key="MxlZzlrJuZafQSvVQxvMtJeexLEOyARs";
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Hoith95/Pet-99/main/GScripts-Rank"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/GScripts-Rank"))()
