@@ -9,5 +9,3 @@ end
 _G.SCRIPT3 = true
 
 -- Script của bạn
-task.wait(20)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/skadidau/unfazedfree/main/bloxfruit"))()
