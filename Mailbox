@@ -5,7 +5,7 @@
 --loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Mailbox-Pet-Event"))()
 
 --- Gửi Items ---
---loadstring(game:HttpGet("https://raw.githubusercontent.com/ddracular111/Pet99pro/main/Mailbox-Items"))()
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Mailbox-Items"))()
 
 --- Gửi Tất Cả Gems ---
 --loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Mailbox-Gems"))()
