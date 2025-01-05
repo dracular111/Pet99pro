@@ -1,4 +1,4 @@
 while true do
     wait(360)  -- chờ 360 giây (6 phút)
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/dinhtuanp654/pet99/main/Reset-Script"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Reset-Script"))()
 end
