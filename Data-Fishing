@@ -67,7 +67,7 @@ end
         game:GetService("Workspace"):WaitForChild("ALWAYS_RENDERING"):Destroy()
     end)
     -- Chạy script giảm tải CPU từ một URL GitHub.
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Hoith95/Pet-99/main/CPUReducer"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/CPUReducer"))()
     -- Ẩn tất cả giao diện người dùng của người chơi hiện tại.
     for i, gui in pairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
         if gui:IsA("ScreenGui") then
