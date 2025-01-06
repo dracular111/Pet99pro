@@ -1,6 +1,6 @@
-game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("World3Teleport"):InvokeServer()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Del-CoreGui"))()
-task.wait(25)
+--game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("World3Teleport"):InvokeServer()
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Del-CoreGui"))()
+--task.wait(25)
 --script_key="nqUpDxePweAxwZQxVIrafewMkJqqcZrB";
 _G.GPROGRESS_MODE = "Hybrid" -- Hatch
 _G.GGFX_MODE = 1
