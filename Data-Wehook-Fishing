@@ -17,4 +17,4 @@ end
 
 -- Khi trạng thái là true, thực thi Script 1
 print("Script 0 đã hoàn thành. Bắt đầu chạy Script 1...")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Data-Fishing"))()
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Data-Fishing"))()
