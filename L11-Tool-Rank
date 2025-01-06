@@ -1,5 +1,4 @@
 game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("World3Teleport"):InvokeServer()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/KiTTYWARE-Rank"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Del-CoreGui"))()
 task.wait(25)
 script_key="ozyALRzApIKRcpUSUqATAFdnKIEPOpSf";
@@ -22,3 +21,4 @@ _G.GUSE_ULTIMATES = {"Chest Spell","Ground Pound"}
 _G.GUSE_FLAGS = {"Fortune Flag","Diamonds Flag","Coins Flag"}
 _G.GENCHANTS = {"Diamonds","Criticals","Treasure Hunter","Lucky Eggs","Huge Hunter","Fortune"}
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34915da4ad87a5028e1fd64efbe3543f.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/KiTTYWARE-Rank"))()
