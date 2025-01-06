@@ -108,7 +108,7 @@ end
 -- Đánh dấu script đã được chạy
 _G.FISHING = true
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Hoith95/Pet-99/main/Notification"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Notification"))()
 
 -- Vòng lặp này sẽ tiếp tục chạy miễn là biến autoFishing trong getgenv() là true.
 while getgenv().autoFishing do
