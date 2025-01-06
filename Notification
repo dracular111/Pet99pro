@@ -1,0 +1,228 @@
+-- Script 2: Chờ trạng thái hoàn thành và thực thi
+print("Kiểm tra trạng thái Script 1...")
+
+-- Chờ đến khi trạng thái _G.FISHING là true
+while not _G.FISHING do
+    print("Script 1 chưa hoàn thành, đang chờ...")
+    task.wait(1) -- Chờ 1 giây trước khi kiểm tra lại
+end
+
+-- Khi trạng thái là true, thực thi Script 2
+print("Script 1 đã hoàn thành. Bắt đầu chạy Script 2...")
+
+-- Kiểm tra biến toàn cục để xác định script đã chạy hay chưa
+if _G.Notification then
+    warn("Script đã được chạy trước đó!")
+    return -- Dừng script nếu đã chạy
+end
+
+-- Yêu cầu các module cần thiết từ ReplicatedStorage để sử dụng trong script.
+local DaycareCmds = require(game.ReplicatedStorage.Library.Client.DaycareCmds)
+local SaveModule = require(game.ReplicatedStorage.Library.Client.Save)
+
+-- Định nghĩa hàm kiểm tra xem có pet nào trong daycare không.
+local function petInDaycare()
+    return next(DaycareCmds.GetActive()) ~= nil
+end
+
+-- Định nghĩa hàm lấy thời gian còn lại được tăng tốc của pet trong daycare.
+local function getAcceleratedRemainingTime()
+    local remainingTime = 0
+    -- Duyệt qua danh sách pet đang hoạt động trong daycare.
+    for petId, _ in pairs(DaycareCmds.GetActive()) do
+        -- Tính toán thời gian còn lại cho mỗi pet.
+        local time = DaycareCmds.ComputeRemainingTime(petId)
+        -- Lấy thời gian lớn nhất.
+        if time > remainingTime then
+            remainingTime = time
+        end
+    end
+    -- Chia thời gian còn lại cho 5 để tăng tốc độ.
+    return remainingTime / 5
+end
+
+-- Định nghĩa hàm định dạng thời gian từ giây sang giờ:phút:giây.
+local function formatTime(seconds)
+    local hours = math.floor(seconds / 3600)
+    local minutes = math.floor((seconds % 3600) / 60)
+    local seconds = seconds % 60
+    return string.format("%02d:%02d:%02d", hours, minutes, seconds)
+end
+
+-- Lấy PlayerGui của người chơi hiện tại.
+local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+-- Tạo một ScreenGui mới để hiển thị thông báo.
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "NotificationGui"
+screenGui.Parent = playerGui
+
+-- Tạo một Frame làm nền cho các thông báo.
+local backgroundFrame = Instance.new("Frame")
+backgroundFrame.Size = UDim2.new(1, 0, 1.1, 0) -- Phủ 45% màn hình theo chiều dọc
+backgroundFrame.BackgroundColor3 = Color3.new(0, 0, 0) -- Màu nền đen
+backgroundFrame.Position = UDim2.new(0, 0, 0, -50) -- Vị trí bắt đầu từ góc trên bên trái
+backgroundFrame.BorderSizePixel = 0 -- Không có viền
+backgroundFrame.Parent = screenGui
+
+-- Tạo một TextLabel để hiển thị thời gian còn lại.
+local timeLabel = Instance.new("TextLabel", backgroundFrame)
+timeLabel.Name = "TimeLabel"
+timeLabel.Size = UDim2.new(1, 0, 1/6, 0)
+timeLabel.Position = UDim2.new(0, 0, 0, 20)
+timeLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Màu nền đen
+timeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+timeLabel.BorderSizePixel = 0
+timeLabel.TextScaled = true
+
+-- Tạo một TextLabel khác để hiển thị thông báo về số lượng Huge pet.
+local hugeLabel = Instance.new("TextLabel", backgroundFrame)
+hugeLabel.Name = "HugeLabel"
+hugeLabel.Text = "Éo Được Huge nào."
+hugeLabel.Size = UDim2.new(1, 0, 1/6, 0)
+hugeLabel.Position = UDim2.new(0, 0, 1/6, 0)
+hugeLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Màu nền đen
+hugeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+hugeLabel.BorderSizePixel = 0
+hugeLabel.TextScaled = true
+
+-- Tạo một TextLabel nữa để hiển thị số lượng Diamonds.
+local diamondLabel = Instance.new("TextLabel", backgroundFrame)
+diamondLabel.Name = "DiamondLabel"
+diamondLabel.Text = "Đang cập nhật Diamonds..."
+diamondLabel.Size = UDim2.new(1, 0, 1/6, 0)
+diamondLabel.Position = UDim2.new(0, 0, 2/6, 0)
+diamondLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Màu nền đen
+diamondLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+diamondLabel.BorderSizePixel = 0
+diamondLabel.TextScaled = true
+
+-- Tạo một TextLabel nữa để hiển thị chức năng tool và tác giả.
+local draculaLabel = Instance.new("TextLabel", backgroundFrame)
+draculaLabel.Name = "draculaLabel"
+draculaLabel.Text = "DAYCARE | FISNING "
+draculaLabel.Font = Enum.Font.GothamBold
+draculaLabel.Size = UDim2.new(1, 0, 1/6, 0)
+draculaLabel.Position = UDim2.new(0, 0, 5/6, 0) -- Chỉnh vị trí xuống cuối cùng trên screengui
+draculaLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Màu nền đen
+draculaLabel.TextColor3 = Color3.fromRGB(0, 128, 0) -- Màu xanh lá cây
+draculaLabel.BorderSizePixel = 0
+draculaLabel.TextScaled = true
+
+-- Định nghĩa hàm cập nhật thông báo số lượng Huge pet.
+local function updateHugeNotification(hugeCount)
+    hugeLabel.Text = "HUGE: " .. hugeCount ..""
+    -- Thay đổi màu nền dựa trên số lượng Huge pet.
+    hugeLabel.BackgroundColor3 = hugeCount == 0 and Color3.fromRGB(0, 0, 0) or Color3.fromRGB(0, 128, 0)
+    hugeLabel.TextColor3 = hugeCount == 0 and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(255, 0, 0)
+    hugeLabel.Font = Enum.Font.GothamBold
+end
+
+-- Định nghĩa hàm cập nhật thông báo số lượng Diamonds.
+local function updateDiamondNotification(diamondCount)
+    diamondLabel.Text = "GEMS: " .. diamondCount ..""
+    diamondLabel.TextColor3 = Color3.fromRGB(0, 128, 255)
+    diamondLabel.Font = Enum.Font.GothamBold
+end
+
+-- Khởi tạo biến để theo dõi thời gian cập nhật cuối cùng.
+local lastHugeUpdateTime = 0
+local lastDiamondUpdateTime = 0
+local initialDiamondValue = game.Players.LocalPlayer.leaderstats["\240\159\146\142 Diamonds"].Value
+
+-- Tạo một luồng mới để cập nhật thông báo.
+task.spawn(function()
+    while true do
+        local currentTime = os.time()
+        -- Kiểm tra và cập nhật thông báo Huge pet mỗi 30 giây.
+        if currentTime >= lastHugeUpdateTime + 30 then
+            TotalHuge = 0
+            local result = SaveModule.Get()
+            local pets = result.Inventory.Pet
+            -- Đếm số lượng Huge pet.
+            for _, pet in pairs(pets) do
+                if string.match(pet.id,"Huge") then
+                    TotalHuge = TotalHuge + 1
+                end
+            end
+            updateHugeNotification(TotalHuge)
+            lastHugeUpdateTime = currentTime
+        end
+        -- Kiểm tra và cập nhật thông báo Diamonds mỗi 30 giây.
+        if currentTime >= lastDiamondUpdateTime + 30 then
+            local currentDiamondValue = game.Players.LocalPlayer.leaderstats["\240\159\146\142 Diamonds"].Value
+            updateDiamondNotification(currentDiamondValue)
+            lastDiamondUpdateTime = currentTime
+            -- Kiểm tra nếu giá trị Diamonds không thay đổi trong 5 phút.
+            if currentDiamondValue == initialDiamondValue and currentTime >= lastDiamondUpdateTime + 300 then
+                print("Giá trị Diamonds không thay đổi trong 5 phút!")
+                --loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/ServerKick"))()
+                --loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/ServerHop3"))()
+                --task.wait(9)
+                --loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/ServerHop2"))()
+            end
+        end
+        -- Đợi 5 giây trước khi kiểm tra lại.
+        task.wait(5)
+    end
+end)
+
+-- Khởi tạo luồng để cập nhật thời gian daycare.
+task.spawn(function()
+    while true do
+        -- Kiểm tra và cập nhật thời gian nếu có pet trong daycare.
+        if petInDaycare() then
+            local acceleratedTime = getAcceleratedRemainingTime()
+            -- Thoát vòng lặp nếu hết thời gian.
+            if acceleratedTime <= 0 then
+            -- Cập nhật GUI nếu tới thời gian nhận thưởng trong daycare.
+            timeLabel.Text = "NHẬN THƯỞNG DAYCARE."
+            timeLabel.Font = Enum.Font.GothamBold
+                -- Thực hiện hành động khi thời gian kết thúc
+                --print("Thời gian đã hết, bắt đầu thực hiện Hop Server mới.")
+                --task.wait(1)
+                --loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/ServerKick"))()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/ServerHop3"))()
+                --task.wait(9)
+                --loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/ServerHop2"))()
+            else
+                -- Cập nhật thời gian còn lại trên GUI.
+                timeLabel.Text = "DAYCARE: " .. formatTime(acceleratedTime)
+                timeLabel.Font = Enum.Font.GothamBold
+            end
+        else
+            -- Cập nhật GUI nếu không có pet trong daycare.
+            timeLabel.Text = "Không có pet trong daycare."
+            timeLabel.Font = Enum.Font.GothamBold
+            -- Thực hiện hành động khác khi không có pet trong daycare
+            --print("Không có pet nào trong daycare, bắt đầu thực hiện Hop Server mới.")
+            task.wait(1)
+            --loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/ServerKick"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/ServerHop3"))()
+            --task.wait(9)
+            --loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/ServerHop2"))()
+        end
+        -- Đợi 1 giây trước khi kiểm tra lại.
+        task.wait(1)
+    end
+end)
+
+spawn(function()
+    while true do
+        wait(1)  -- chờ 1 giây
+        _G.WEBHOOK = true
+    end
+end)
+
+spawn(function()
+    while true do
+        wait(1)  -- chờ 1 giây
+        _G.Notification = true
+    end
+end)
+
+spawn(function()
+    while true do
+        wait(1)  -- chờ 1 giây
+        setfpscap(5)
+    end
+end)
