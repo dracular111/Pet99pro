@@ -1,0 +1,81 @@
+-- Đợi cho đến khi trò chơi tải xong trước khi thực hiện các thay đổi.
+repeat
+    task.wait()
+until game:IsLoaded()
+
+-- Lấy đối tượng Terrain và Lighting từ Workspace để thực hiện các thay đổi.
+local Workspace = game:GetService("Workspace")
+local Terrain = Workspace:WaitForChild("Terrain")
+local Lighting = game:GetService("Lighting")
+
+-- Thiết lập các thuộc tính của Terrain để giảm độ phức tạp đồ họa của nước.
+Terrain.WaterReflectance = 0 -- Đặt độ phản chiếu của nước về 0 để nước không phản chiếu môi trường xung quanh.
+Terrain.WaterTransparency = 1 -- Đặt độ trong suốt của nước về 1 để nước hoàn toàn trong suốt, không hiển thị.
+Terrain.WaterWaveSize = 0 -- Đặt kích thước sóng nước về 0 để loại bỏ hiệu ứng sóng trên mặt nước.
+Terrain.WaterWaveSpeed = 0 -- Đặt tốc độ di chuyển của sóng nước về 0 để sóng nước không di chuyển.
+
+-- Thiết lập các thuộc tính của Lighting để giảm độ phức tạp đồ họa và tăng hiệu suất.
+Lighting.Brightness = 0 -- Đặt độ sáng của môi trường về 0 để làm tối môi trường.
+Lighting.GlobalShadows = false -- Tắt bóng toàn cầu để giảm tải đồ họa và tăng hiệu suất.
+Lighting.FogEnd = 9e100 -- Đặt điểm kết thúc của sương mù về một giá trị rất lớn, làm cho sương mù không hiển thị và tăng tầm nhìn.
+Lighting.FogStart = 0 -- Đặt điểm bắt đầu của sương mù về 0 để sương mù không bắt đầu từ bất kỳ điểm nào trong môi trường.
+
+-- Sử dụng hàm sethiddenproperty để thay đổi các thuộc tính ẩn của Lighting và Terrain.
+sethiddenproperty(Lighting, "Technology", 2) -- Thay đổi công nghệ đồ họa được sử dụng bởi Lighting sang giá trị 2.
+sethiddenproperty(Terrain, "Decoration", false) -- Tắt trang trí tự động của Terrain để giảm tải đồ họa.
+
+-- Hàm clearTextures loại bỏ hoặc làm trong suốt các đối tượng không cần thiết để tối ưu hóa hiệu suất.
+local function clearTextures(v)
+    if v:IsA("BasePart") and not v:IsA("MeshPart") then
+        -- Đặt vật liệu của các phần cứng cơ bản thành Plastic và loại bỏ độ phản chiếu.
+        v.Material = "Plastic"
+        v.Reflectance = 0
+    elseif (v:IsA("Decal") or v:IsA("Texture")) then
+        -- Làm trong suốt các decal và texture để chúng không hiển thị.
+        v.Transparency = 1
+    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+        -- Vô hiệu hóa các ParticleEmitter và Trail bằng cách đặt thời gian sống của chúng về 0.
+        v.Lifetime = NumberRange.new(0)
+    elseif v:IsA("Explosion") then
+        -- Giảm áp suất và bán kính của vụ nổ để chúng không gây ảnh hưởng đến môi trường.
+        v.BlastPressure = 1
+        v.BlastRadius = 1
+    elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+        -- Tắt các hiệu ứng Fire, SpotLight, Smoke và Sparkles để giảm tải đồ họa.
+        v.Enabled = false
+    elseif v:IsA("MeshPart") then
+        -- Đặt vật liệu của MeshPart thành Plastic, loại bỏ độ phản chiếu và xóa texture.
+        v.Material = "Plastic"
+        v.Reflectance = 0
+        v.TextureID = 10385902758728957
+    elseif v:IsA("SpecialMesh")  then
+        -- Xóa texture của SpecialMesh.
+        v.TextureId = 0
+    elseif v:IsA("ShirtGraphic") then
+        -- Làm trong suốt ShirtGraphic.
+        v.Graphic = 1
+    elseif (v:IsA("Shirt") or v:IsA("Pants")) then
+        -- Làm trong suốt Shirt và Pants.
+        v[v.ClassName .. "Template"] = 1
+    elseif v.Name == "Foilage" and v:IsA("Folder") then
+        -- Xóa thư mục Foilage để loại bỏ cây cối và bụi rậm.
+        v:Destroy()
+    elseif string.find(v.Name, "Tree") or string.find(v.Name, "Water") or string.find(v.Name, "Bush") or string.find(v.Name, "grass") then
+        -- Xóa các đối tượng có tên liên quan đến cây, nước, bụi rậm và cỏ để giảm tải đồ họa.
+        task.wait()
+        v:Destroy()
+    end
+end
+
+-- Xóa tất cả các đối tượng con của Lighting để giảm độ phức tạp đồ họa.
+game:GetService("Lighting"):ClearAllChildren()
+
+-- Áp dụng hàm clearTextures cho tất cả các đối tượng con của Workspace.
+for _, v in pairs(Workspace:GetDescendants()) do
+    clearTextures(v)
+end
+
+-- Kết nối sự kiện DescendantAdded với hàm clearTextures để tự động làm sạch các đối tượng mới được thêm vào.
+Workspace.DescendantAdded:Connect(function(v)
+    clearTextures(v)
+end)
