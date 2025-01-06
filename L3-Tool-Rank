@@ -19,3 +19,5 @@ game:GetService('StarterGui'):SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, fal
 
 game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.EmotesMenu, false)
 end)
+task.wait(60)  -- 60s Reset 1 Lần
+game.Players.LocalPlayer:Kick("Reset Script")
