@@ -172,5 +172,5 @@ while game.Players.LocalPlayer.Character:FindFirstChild("Model") and game.Player
 end
 task.wait(1)
 -- Notification cập nhật thông báo thời gian còn lại Daycare, số lượng Huge, Gems hiện có
---loadstring(game:HttpGet("https://raw.githubusercontent.com/Hoith95/Pet-99/main/Notification"))()
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Notification"))()
 end
