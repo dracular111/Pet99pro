@@ -9,3 +9,4 @@ end
 _G.SCRIPT4 = true
 
 -- Script của bạn
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Fishing-Wehook"))()
