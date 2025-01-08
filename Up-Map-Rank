@@ -1,6 +1,6 @@
 game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("World3Teleport"):InvokeServer()
 task.wait(15)
-script_key="exOSidXnJBKxAvgnjyLDTpRqSOYedCcv";
+script_key="xwEkWnZBtrWEjnZgNwjOjEYuCzXgJUZf";
 _G.GPROGRESS_MODE = "Hybrid" -- Hatch
 _G.GGFX_MODE = 1
 _G.GRANK_TO = 99
@@ -20,3 +20,4 @@ _G.GUSE_ULTIMATES = {"Chest Spell","Ground Pound"}
 _G.GUSE_FLAGS = {"Fortune Flag","Diamonds Flag","Coins Flag"}
 _G.GENCHANTS = {"Diamonds","Criticals","Treasure Hunter","Lucky Eggs","Huge Hunter","Fortune"}
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34915da4ad87a5028e1fd64efbe3543f.lua"))()
+
