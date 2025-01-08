@@ -1,6 +1,6 @@
 game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("World3Teleport"):InvokeServer()
 task.wait(15)
-script_key="xwEkWnZBtrWEjnZgNwjOjEYuCzXgJUZf";
+script_key="exOSidXnJBKxAvgnjyLDTpRqSOYedCcv";
 _G.GPROGRESS_MODE = "Hybrid" -- Hatch
 _G.GGFX_MODE = 1
 _G.GRANK_TO = 99
