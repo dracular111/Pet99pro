@@ -22,46 +22,45 @@ getgenv().hugemode = {
     },
     [4] = {
         ["Min"] = "501m",
-        ["Max"] = "4000m",
+        ["Max"] = "3000m",
         ["% Sell"] = 50,
     }
 }
 getgenv().item = {
-    ["Lockpick A"] = 98,
-    ["Lockpick B"] = 98,
-    ["Lockpick C"] = 98,
-    ["Hype Egg"] = 95,
-    ["Snowflake Gift"] = 95,
+    ["Lockpick A"] = 95,
+    ["Lockpick B"] = 95,
+    ["Lockpick C"] = 95,
+    ["Hype Egg"] = 90,
+    ["Snowflake Gift"] = 98,
     ["2024 Small Christmas Present"] = 90,
     ["2024 Medium Christmas Present"] = 95,
     ["2024 Large Christmas Present"] = 95,
     ["2024 X-Large Christmas Present"] = 95,
     ["2024 Gargantuan Christmas Present"] = 95,
-    ["Mini Chest"] = 95,
+    ["Mini Chest"] = 80,
     ["Rainbow Swirl"] = 50,
     ["Old Boot"] = 50,
-    ["Gift Bag"] = 95,
-    ["Large Gift Bag"] = 95,
-    ["Grinch-B-Gone"] = 95,
-    ["Charm Stone"] = 95,
-    ["Overload"] = 95,
-    ["Royalty"] = 95,
-    ["Insta Plant Capsule"] = 95,
-    ["2025 New Years Gift"] = 95,
-    ["Rainbow Mini Chest"] = 95,
+    ["Gift Bag"] = 90,
+    ["Large Gift Bag"] = 90,
+    ["Grinch-B-Gone"] = 90,
+    ["Charm Stone"] = 90,
+    ["Overload"] = 90,
+    ["Royalty"] = 90,
+    ["Insta Plant Capsule"] = 90,
+    ["2025 New Years Gift"] = 100,
+    ["Rainbow Mini Chest"] = 80,
     ["Huge Machine Egg 4"] = 90,
-    ["Turkey Gift"] = 95,
+    ["Turkey Gift"] = 80,
     ["Crystal Key"] = 95,
-    ["Secret Key"] = 90,
-    ["Tech Key"] = 90,
-    ["Void Key"] = 95,
-    ["Spinny Wheel Ticket"] = 95,
-    ["Tech Spinny Wheel Ticket"] = 95,
-    ["Watermelon"] = 95,
-    ["Void Spinny Wheel Ticket"] = 95,
+    ["Secret Key"] = 95,
+    ["Tech Key"] = 80,
+    ["Void Key"] = 80,
+    ["Spinny Wheel Ticket"] = 80,
+    ["Tech Spinny Wheel Ticket"] = 80,
+    ["Watermelon"] = 80,
+    ["Void Spinny Wheel Ticket"] = 80,
     ["2024 Anniversary Gift"] = 95,
-    ["2025 New Years Gift"] = 120,
-    ["Watermelon"] = 95,
+    ["Watermelon"] = 80,
 }
 repeat wait() until game:IsLoaded()
 local VirtualUser = game:service 'VirtualUser'
@@ -101,12 +100,12 @@ if game.PlaceId == 8737899170 then
     if totalhuge >= 5 then
         TeleportService:Teleport(15588442388)
     else
-        TeleportService:Teleport(15502339095)
+        TeleportService:Teleport(15502339080)
     end
 end
 
 
-if game.PlaceId == 15588442388 or game.PlaceId == 15502339095 then
+if game.PlaceId == 15588442388 or game.PlaceId == 15502339080 then
     function getnearboot()
         local pos
         local distance = math.huge
@@ -166,7 +165,7 @@ if game.PlaceId == 15588442388 or game.PlaceId == 15502339095 then
     end)
     spawn(function()
         while wait(getgenv().Config["Time Remove"] * 60) do
-            if game.PlaceId == 15588442388 or game.PlaceId == 15502339095 then
+            if game.PlaceId == 15588442388 or game.PlaceId == 15502339080 then
                 local plr = game.Players.LocalPlayer
                 for i, v in next, workspace.__THINGS.Booths:GetChildren() do
                     if v:GetAttribute("Owner") == plr.UserId then
@@ -199,7 +198,7 @@ if game.PlaceId == 15588442388 or game.PlaceId == 15502339095 then
                             "Booths_CreateListing"):InvokeServer(unpack(args))
     ]]
     while wait() do
-        if game.PlaceId == 15588442388 or game.PlaceId == 15502339095 then
+        if game.PlaceId == 15588442388 or game.PlaceId == 15502339080 then
             for i, v in save.Get().Inventory do
                 for i1, v1 in next, v do
                     local am = v1._am or 1
