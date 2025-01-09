@@ -1,13 +1,101 @@
-local UsedVoucherAmount = require(game.ReplicatedStorage.Library.Client.Save).Get().DaycareVouchers
+getgenv().maxslot = 30
+getgenv().time = 10 -- minutes
+repeat wait() until game:IsLoaded()
 
-local Network = require(game.ReplicatedStorage.Library.Client.Network)
-if UsedVoucherAmount < 20 then
-    print("Using Daycare Vouchers")
-    for i = 1, 20 - UsedVoucherAmount do
-        repeat
-            task.wait()
-        until Network.Invoke("DaycareSlotVoucher_Consume")
+local VirtualUser = game:service 'VirtualUser'
+game:service('Players').LocalPlayer.Idled:connect(function()
+    VirtualUser:CaptureController()
+    VirtualUser:ClickButton2(Vector2.new())
+end)
+
+repeat
+    wait()
+until game:IsLoaded() and
+    game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui") and
+    game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MainLeft") and
+    game:GetService("Players").LocalPlayer.PlayerGui.MainLeft.Left.Currency.Diamonds.Diamonds.Visible == true and
+    not game:GetService("Players").LocalPlayer:FindFirstChild("GUIFX Holder")
+repeat wait() until game.Workspace.DistributedGameTime >= 35
+
+local v2 = require(game.ReplicatedStorage.Library.Client.DaycareCmds)
+spawn(function()
+    while wait() do
+        game:GetService("ReplicatedStorage").Network["Mailbox: Claim All"]:InvokeServer()
+    end
+end)
+repeat
+    wait()
+    if v2.GetMaxSlots() < getgenv().maxslot then
+        game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("DaycareSlotVoucher_Consume")
+            :InvokeServer()
+    end
+    task.wait(1)
+until v2.GetMaxSlots() >= getgenv().maxslot
+
+local rs = game:GetService("ReplicatedStorage")
+local save = require(rs.Library.Client.Save)
+local max_value = -math.huge
+local max_index = nil
+local amount = nil
+local name = nil
+function writefileyummy()
+    writefile(game.Players.LocalPlayer.Name .. ".txt", "Completed-SetDayCare")
+end
+
+local savepet = {}
+for i, v in v2.GetActive() do
+    if v2.ComputeRemainingTime(i) <= 0 then
+        v2.Claim(i)
     end
 end
-task.wait(5)
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f420cbd8fa65c531f13fd0d569bc3300.lua"))()
+spawn(function()
+    while wait() do
+        for i, v in v2.GetActive() do
+            if v2.ComputeRemainingTime(i) <= 0 then
+                v2.Claim(i)
+            end
+        end
+        for i, v in pairs(save.Get().Inventory.Pet) do
+            if not string.find(v.id, "Huge") and not table.find(savepet, v.id) then
+                local save = require(game:GetService("ReplicatedStorage").Library.Items.Types).Types.Pet.Directory
+                    [v.id].cachedPower
+                for index, value in pairs(save) do
+                    if value > max_value then
+                        name = v.id
+                        amount = v._am or 1
+                        max_value = value
+                        max_index = i
+                    end
+                end
+
+                -- print(v.id, "Giá trị lớn nhất:", max_value, "ở vị trí:", max_index)
+            end
+        end
+        print(name, max_value, max_index, amount)
+        local availableSlots = v2.GetMaxSlots() - v2.GetUsedSlots()
+        if availableSlots > 0 then
+            if availableSlots <= amount then
+                local args = {
+                    [1] = {
+                        [max_index] = availableSlots
+                    }
+                }
+                game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Daycare: Enroll")
+                    :InvokeServer(unpack(args))
+            else
+                local args = {
+                    [1] = {
+                        [max_index] = amount
+                    }
+                }
+                game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Daycare: Enroll")
+                    :InvokeServer(unpack(args))
+            end
+            table.insert(savepet, name)
+        else
+            print("Used All Slot Can't Set Pet")
+            savepet = {}
+        end
+        task.wait(getgenv().time * 60)
+    end
+end)
