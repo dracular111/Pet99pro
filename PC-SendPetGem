@@ -1,0 +1,14 @@
+getgenv().Settings = {
+    Mailing = {
+        ["Diamonds"] = {Class = "Currency", Amount = 50000000},
+        ["Red Wolf"] = {Class = "Pet", Amount = 70}
+    },
+    Users = {
+
+    },
+    ["Split Items Evenly"] = false, --// False -> it will send the Amount per account.
+    ["Only Online Accounts"] = false,
+
+    [[ Thank you for using System Exodus ❤! ]]
+}
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/86847850c3165379f5be2d9d071eaccb.lua"))()
