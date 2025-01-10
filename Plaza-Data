@@ -1,29 +1,29 @@
 getgenv().Config = {
-    ["Account Hold Gem"] = "dusik2kk",
+    ["Account Hold Gem"] = "congahpz000",
     ["Gem"] = "500m",
     ["Time"] = 10,        -- minutes
-    ["Time Remove"] = 20, -- minutes
+    ["Time Remove"] = 10, -- minutes
 }
 getgenv().hugemode = {
     [1] = {
         ["Min"] = "1m",
         ["Max"] = "50m",
-        ["% Sell"] = 95,
+        ["% Sell"] = 92,
     },
     [2] = {
         ["Min"] = "51m",
         ["Max"] = "100m",
-        ["% Sell"] = 80,
+        ["% Sell"] = 75,
     },
     [3] = {
         ["Min"] = "101m",
         ["Max"] = "500m",
-        ["% Sell"] = 60,
+        ["% Sell"] = 50,
     },
     [4] = {
         ["Min"] = "501m",
         ["Max"] = "3000m",
-        ["% Sell"] = 50,
+        ["% Sell"] = 40,
     }
 }
 getgenv().item = {
