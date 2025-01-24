@@ -23,7 +23,7 @@ getgenv().hugemode = {
     [4] = {
         ["Min"] = "1001m",
         ["Max"] = "4000m",
-        ["% Sell"] = 35,
+        ["% Sell"] = 30,
     }
 }
 getgenv().item = {
@@ -32,7 +32,7 @@ getgenv().item = {
     ["Lockpick C"] = 95,
     ["Hype Egg"] = 90,
     ["Snowflake Gift"] = 98,
-    ["2024 Small Christmas Present"] = 80,
+    ["2024 Small Christmas Present"] = 95,
     ["2024 Medium Christmas Present"] = 95,
     ["2024 Large Christmas Present"] = 95,
     ["2024 X-Large Christmas Present"] = 95,
@@ -47,20 +47,20 @@ getgenv().item = {
     ["Overload"] = 90,
     ["Royalty"] = 90,
     ["Insta Plant Capsule"] = 90,
-    ["2025 New Years Gift"] = 100,
-    ["Rainbow Mini Chest"] = 80,
+    ["2025 New Years Gift"] = 95,
+    ["Rainbow Mini Chest"] = 90,
     ["Huge Machine Egg 4"] = 90,
-    ["Turkey Gift"] = 80,
+    ["Turkey Gift"] = 90,
     ["Crystal Key"] = 100,
     ["Secret Key"] = 100,
     ["Tech Key"] = 80,
     ["Void Key"] = 80,
-    ["Spinny Wheel Ticket"] = 80,
-    ["Tech Spinny Wheel Ticket"] = 80,
+    ["Spinny Wheel Ticket"] = 90,
+    ["Tech Spinny Wheel Ticket"] = 90,
     ["Watermelon"] = 80,
-    ["Void Spinny Wheel Ticket"] = 80,
+    ["Void Spinny Wheel Ticket"] = 90,
     ["2024 Anniversary Gift"] = 95,
-    ["Watermelon"] = 80,
+    ["Watermelon"] = 90,
 }
 repeat wait() until game:IsLoaded()
 local VirtualUser = game:service 'VirtualUser'
