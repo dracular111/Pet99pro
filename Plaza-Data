@@ -8,7 +8,7 @@ getgenv().hugemode = {
     [1] = {
         ["Min"] = "1m",
         ["Max"] = "50m",
-        ["% Sell"] = 95,
+        ["% Sell"] = 92,
     },
     [2] = {
         ["Min"] = "51m",
