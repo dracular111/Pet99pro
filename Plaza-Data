@@ -1,6 +1,6 @@
 getgenv().Config = {
     ["Account Hold Gem"] = "congahpz000",
-    ["Gem"] = "999m",
+    ["Gem"] = "500m",
     ["Time"] = 10,        -- minutes
     ["Time Remove"] = 5, -- minutes
 }
