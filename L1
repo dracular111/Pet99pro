@@ -1,5 +1,7 @@
---loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Optimal"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Optimal"))()
+task.wait(10)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Del-CoreGui"))()
+task.wait(10)
 script_key = "IYfHztySbmhTSRrHaKyKmPoaiHMyNwZu";
 _G.GEVENT_FPS  = 5
 _G.GDO_CARD_WORLD_EVENT = true
