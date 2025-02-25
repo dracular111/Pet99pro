@@ -1,4 +1,5 @@
 --loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Optimal"))()
+task.wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Del-CoreGui"))()
 script_key = "YOKEyYvmzktlUJlbpUsKhjscNqlUnLdv";
 _G.GEVENT_FPS  = 5
