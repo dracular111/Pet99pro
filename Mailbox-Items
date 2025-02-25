@@ -13,18 +13,17 @@ local random_user = available_users[math.random(1, #available_users)]
 
 getgenv().Settings = {
     Mailing = {
-	["Huge Machine Egg 4"] = {Class = "Egg", Minimum = 1, Amount = 1},
-	["Jolly Gift"] = {Class = "Lootbox", Minimum = 1, Amount = "Max"},
-	["Lockpick A"] = {Class = "Misc", Minimum = 200, Amount = "Max"},
-	["Lockpick B"] = {Class = "Misc", Minimum = 5, Amount = "Max"},
-	["Lockpick C"] = {Class = "Misc", Minimum = 1, Amount = "Max"},
-	["Hype Egg"] = {Class = "Lootbox", Minimum = 1, Amount = "Max"},
-	["Snowflake Gift"] = {Class = "Lootbox", Minimum = 300, Amount = "Max"},
-	["2024 Gargantuan Christmas Present"] = {Class = "Lootbox", Minimum = 5, Amount = "Max"},
-	["2024 X-Large Christmas Present"] = {Class = "Lootbox", Minimum = 5, Amount = "Max"},
-	["2024 Large Christmas Present"] = {Class = "Lootbox", Minimum = 50, Amount = "Max"},
-	["2024 Medium Christmas Present"] = {Class = "Lootbox", Minimum = 150, Amount = "Max"},
-	["2024 Small Christmas Present"] = {Class = "Lootbox", Minimum = 400, Amount = "Max"},
+	["All Huges"] = {Class = "Pet", Id = "All Huges", Amount = 1},
+	["Fantasy Pack"] = {Class = "Lootbox", Id = "Fantasy Pack", MinAmount = 10},
+	["Retro Pack"] = {Class = "Lootbox", Id = "Retro Pack", MinAmount = 30},
+	["Nightmare Pack"] = {Class = "Lootbox", Id = "Nightmare Pack", MinAmount = 20},
+	["Hype Egg 2"] = {Class = "Lootbox", Id = "Hype Egg 2", MinAmount = 1},
+	["Daycare egg"] = {Class = "Egg", Id = "Huge Machine Egg 4", MinAmount = 1},
+	["Secret pet1"] = {Class = "Pet", Id = "Rainbow Swirl", MinAmount = 1, AllVariants = true},
+	["Secret pet2"] = {Class = "Pet", Id = "Banana", MinAmount = 1, AllVariants = true},
+	["Secret pet3"] = {Class = "Pet", Id = "Coin", MinAmount = 1, AllVariants = true},
+	["Secret pet4"] = {Class = "Pet", Id = "Lucky Block", MinAmount = 1, AllVariants = true},
+	["Send all Diamonds"] = {Class = "Currency", Id = "Diamonds", KeepAmount = "2m", MinAmount = "5m"},
     },
     Users = {
         random_user, -- Gán người dùng ngẫu nhiên
