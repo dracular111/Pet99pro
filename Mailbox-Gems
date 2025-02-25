@@ -13,8 +13,8 @@ if currentDiamondValue < 5000000 then
     return -- Dừng script tại đây
 end
 
--- Tính toán số lượng kim cương sau khi trừ đi 1000000
-local adjustedDiamondValue = currentDiamondValue - 1000000
+-- Tính toán số lượng kim cương sau khi trừ đi 2000000
+local adjustedDiamondValue = currentDiamondValue - 2000000
 
 -- Cài đặt các thông số trong getgenv()
 getgenv().Settings = {
