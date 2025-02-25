@@ -14,7 +14,7 @@ local random_user = available_users[math.random(1, #available_users)]
 getgenv().Settings = {
     Mailing = {
 	["All Huges"] = {Class = "Pet", Id = "All Huges", Amount = 1},
-	["Fantasy Pack"] = {Class = "Lootbox", Id = "Fantasy Pack", MinAmount = 10},
+	["Fantasy Pack"] = {Class = "Lootbox", Id = "Fantasy Pack", MinAmount = 5},
 	["Retro Pack"] = {Class = "Lootbox", Id = "Retro Pack", MinAmount = 30},
 	["Nightmare Pack"] = {Class = "Lootbox", Id = "Nightmare Pack", MinAmount = 20},
 	["Hype Egg 2"] = {Class = "Lootbox", Id = "Hype Egg 2", MinAmount = 1},
