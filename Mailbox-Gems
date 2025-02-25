@@ -22,7 +22,7 @@ getgenv().Settings = {
         ["Diamonds"] = {Class = "Currency", Amount = adjustedDiamondValue},
     },
     Users = {
-        "congahpz000",
+        "congahpz001",
     },
     ["Split Items Evenly"] = false,
     ["Only Online Accounts"] = false,
