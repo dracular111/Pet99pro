@@ -1,8 +1,25 @@
-game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("World1Teleport"):InvokeServer()
-task.wait(5)
-getgenv().Config = {
-    ["Webhook"] = "https://discord.com/api/webhooks/1315701198757564507/b9Ie9_fWw9urd9HRuJ3Fw0wKt5tKPBO3ciAD9obRQRpUw-V9yaURqCBAoFLajELa52E3",
-    ["UserID"] = "11111111111111",
-    ["MailUsers"] = {"herma9vz"},
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dracular111/Pet99pro/main/Del-CoreGui"))()
+task.wait(10)
+script_key = "WdrMStCoPiyjtdPAlASWcIPHLxmLxviR";
+_G.GEVENT_FPS  = 5
+_G.GDO_CARD_WORLD_EVENT = true
+_G.GCARD_PACK_TO_BUY = "Fantasy Pack" -- or ,"Nightmare Pack", or "Fantasy Pack"
+_G.GLOOTBOXES = {"Locked Hype Egg"} --remove comment & packs yourself
+_G.GEVENT_UPGRADES = {
+    "CheaperPacks",
+    "CheaperTradeIns",
+    "BonusCardChance",
+    "PurchaseMorePacks"
+} -- can remove the ones you don't want to upgrade
+_G.GCLEAR_FAVORITE_PETS = true
+_G.GPOTIONS = {"Lucky","Damage","Coins","Treasure Hunter","Diamonds"}
+_G.GENCHANTS = {"Coins","Coins", "Strong Pets", "Criticals","Strong Pets","Strong Pets","Coins","Lucky Eggs", "Treasure Hunter","Diamonds","Tap Power"}
+_G.GMAX_POWER_FOR_PET_MASTERY_VIA_FUSING = "240t"
+_G.GGFX_MODE = 1 -- or 2 to still see something
+_G.GZONE_TO = 99 -- to enter event from W3 intead put 999
+_G.GWEBHOOK_USERID = "your-discord-id"
+_G.GWEBHOOK_LINK = "https://discord.com/api/webhooks/1318778061742804992/m_I4AUoYpQphYGsercjfOI3fn3Og1BMqzDWjgG250oc5HMcfrGUEc_zHKlZ-KlPhlh8L"
+_G.GMAIL_RECEIVERS = {""} -- for Huges
+_G.GMAIL_ITEMS = {
 }
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e43eeb29211cc04ff3dad8003ed8deaa.lua"))()
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34915da4ad87a5028e1fd64efbe3543f.lua"))()
